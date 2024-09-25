@@ -88,6 +88,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
+vim.opt.colorcolumn = '80'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
