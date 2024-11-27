@@ -404,7 +404,7 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
-
+  -- TODO: bind vim.diagnostic.open_float() maybe to 'gl' or space - e?
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
