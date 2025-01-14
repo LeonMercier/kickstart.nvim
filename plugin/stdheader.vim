@@ -15,11 +15,11 @@ let s:length	= 80
 let s:margin	= 5
 
 let s:types		= {
-			\'\.c$\|\.h$\|\.cc$\|\.hh$\|\.cpp$\|\.hpp$\|\.php':
+			\'\.c$\|\.h$\|\.cc$\|\.hh$\|\.cpp$\|\.hpp$\|\.tpp$\|\.ipp$\|\.cxx$\|\.go$\|\.rs$\|\.php$\|\.py$\|\.java$\|\.kt$\|\.kts$':
 			\['/*', '*/', '*'],
 			\'\.htm$\|\.html$\|\.xml$':
 			\['<!--', '-->', '*'],
-			\'\.js$':
+			\'\.js$\|\.ts$':
 			\['//', '//', '*'],
 			\'\.tex$':
 			\['%', '%', '*'],
@@ -27,10 +27,12 @@ let s:types		= {
 			\['(*', '*)', '*'],
 			\'\.vim$\|\vimrc$':
 			\['"', '"', '*'],
-			\'\.el$\|\emacs$':
+			\'\.el$\|\emacs$\|\.asm$':
 			\[';', ';', '*'],
 			\'\.f90$\|\.f95$\|\.f03$\|\.f$\|\.for$':
-			\['!', '!', '/']
+			\['!', '!', '/'],
+			\'\.lua$':
+			\['--', '--', '-']
 			\}
 
 function! s:filetype()
@@ -55,7 +57,7 @@ function! s:ascii(n)
 endfunction
 
 function! s:textline(left, right)
-	let l:left = strpart(a:left, 0, s:length - s:margin * 3 - strlen(a:right) + 1)
+	let l:left = strpart(a:left, 0, s:length - s:margin * 2 - strlen(a:right))
 
 	return s:start . repeat(' ', s:margin - strlen(s:start)) . l:left . repeat(' ', s:length - s:margin * 2 - strlen(l:left) - strlen(a:right)) . a:right . repeat(' ', s:margin - strlen(s:end)) . s:end
 endfunction
@@ -79,6 +81,9 @@ function! s:line(n)
 endfunction
 
 function! s:user()
+	if exists('g:user42')
+		return g:user42
+	endif
 	let l:user = $USER
 	if strlen(l:user) == 0
 		let l:user = "marvin"
@@ -87,6 +92,9 @@ function! s:user()
 endfunction
 
 function! s:mail()
+	if exists('g:mail42')
+		return g:mail42
+	endif
 	let l:mail = $MAIL
 	if strlen(l:mail) == 0
 		let l:mail = "marvin@42.fr"
