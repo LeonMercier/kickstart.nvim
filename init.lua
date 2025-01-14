@@ -89,6 +89,9 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 vim.opt.colorcolumn = '80'
+-- for 42
+vim.g.user42 = 'lemercie'
+vim.g.mail42 = 'lemercie@student.hive.fi'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -97,7 +100,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -509,6 +512,8 @@ require('lazy').setup({
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          map('<leader>e', vim.diagnostic.open_float, 'show [e]rror')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
