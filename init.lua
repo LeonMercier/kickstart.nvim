@@ -676,49 +676,48 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-      local servers =
-        {
-          clangd = {
-            cmd = {
-              'clangd',
-              '--clang-tidy',
-              '--background-index',
-              '--header-insertion=never',
-            },
-          },
-          -- gopls = {},
-          -- pyright = {},
-          -- rust_analyzer = {},
-          -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-          --
-          -- Some languages (like typescript) have entire language plugins that can be useful:
-          --    https://github.com/pmizio/typescript-tools.nvim
-          --
-          -- But for many setups, the LSP (`tsserver`) will work just fine
-          -- tsserver = {},
-          --
-
-          lua_ls = {
-            -- cmd = {...},
-            -- filetypes = { ...},
-            -- capabilities = {},
-            settings = {
-              Lua = {
-                completion = {
-                  callSnippet = 'Replace',
-                },
-                -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                -- diagnostics = { disable = { 'missing-fields' } },
-              },
-            },
-          },
-
-          r_language_server = {
-            cmd = { 'R', '--no-echo', '-e', 'languageserver::run()' },
-            filetypes = { 'r', 'rmd', 'quarto' },
-            log_level = 2,
+      local servers = {
+        clangd = {
+          cmd = {
+            'clangd',
+            '--clang-tidy',
+            '--background-index',
+            '--header-insertion=never',
           },
         },
+        -- gopls = {},
+        -- pyright = {},
+        -- rust_analyzer = {},
+        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+        --
+        -- Some languages (like typescript) have entire language plugins that can be useful:
+        --    https://github.com/pmizio/typescript-tools.nvim
+        --
+        -- But for many setups, the LSP (`tsserver`) will work just fine
+        -- tsserver = {},
+        --
+
+        lua_ls = {
+          -- cmd = {...},
+          -- filetypes = { ...},
+          -- capabilities = {},
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = 'Replace',
+              },
+              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+              -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+
+        r_language_server = {
+          cmd = { 'R', '--no-echo', '-e', 'languageserver::run()' },
+          filetypes = { 'r', 'rmd', 'quarto' },
+          log_level = 2,
+        },
+      }
       -- Ensure the servers and tools above are installed
       --
       -- To check the current status of installed tools and/or manually install
@@ -903,14 +902,7 @@ require('lazy').setup({
     -- 'folke/tokyonight.nvim',
     'ellisonleao/gruvbox.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
-      }
-
+    init = function()
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
