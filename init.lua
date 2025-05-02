@@ -712,11 +712,11 @@ require('lazy').setup({
           },
         },
 
-        r_language_server = {
+        --[[ r_language_server = {
           cmd = { 'R', '--no-echo', '-e', 'languageserver::run()' },
           filetypes = { 'r', 'rmd', 'quarto' },
           log_level = 2,
-        },
+        }, ]]
       }
       -- Ensure the servers and tools above are installed
       --
@@ -968,7 +968,7 @@ require('lazy').setup({
         'csv',
         'diff',
         'html',
-        'latex',
+        -- 'latex',
         'lua',
         'luadoc',
         'markdown',
